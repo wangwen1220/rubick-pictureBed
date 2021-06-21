@@ -1,0 +1,14 @@
+{
+  "pluginName": "图床",
+  "description": "图片压缩、上传",
+  "main": "index.html",
+  "version": "0.0.1",
+  "logo": "logo.png",
+  "preload": "preload.js",
+  "features": [
+    {
+      "explain": "图片压缩、上传",
+      "cmds":["图床", "压缩", "picture"]
+    }
+  ]
+}
