@@ -72,20 +72,22 @@ import {reactive, toRefs} from 'vue';
 import {useForm} from "@ant-design-vue/use";
 import { message } from 'ant-design-vue';
 
+const defaultConfig = {
+  action: '',
+  data: {
+    action: 'fileUpload'
+  },
+  headers: {},
+  compress: true,
+}
+
 export default {
   name: 'App',
   setup() {
     const state = reactive({
       fileList: [],
       imgList: [],
-      settings: {
-        action: '',
-        data: {
-          action: 'fileUpload'
-        },
-        headers: {},
-        compress: true,
-      },
+      settings: defaultConfig,
       visible: false,
     });
 
@@ -96,7 +98,7 @@ export default {
         state.imgList = JSON.parse(cacheData.data || '[]');
         state.settings = cacheConfig.data ? JSON.parse(cacheConfig.data) : cacheConfig.data;
       } catch (e) {
-        console.log(e);
+        state.settings = defaultConfig;
         // ignore
       }
     })()
@@ -156,6 +158,11 @@ export default {
         fileName: file.name
       }
       state.imgList.unshift(uploadFl);
+
+      if (!state.settings.compress) {
+        return true;
+      }
+
       return new Promise((resolve) => {
         (async () => {
           const fileObj = await window.operate.compressFromImagemin(file.path, state.settings.compress);

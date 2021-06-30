@@ -5,6 +5,8 @@
   "version": "0.0.1",
   "logo": "logo.png",
   "preload": "preload.js",
+  "author": "muwoo",
+  "name": "rubick-pictureBed",
   "features": [
     {
       "explain": "图片压缩、上传",
